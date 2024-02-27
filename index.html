@@ -1,0 +1,180 @@
+
+<!DOCTYPE html><html lang="ru"><head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, user-scalable=no" name="viewport">
+        <meta
+            content="ГДЕ КЛАД? www.MEGA.dm - НАДЕЖНЫЙ ДАРКМАРКЕТ. КУПИТЬ ЗАКЛАДКИ В ДАРКНЕТЕ. ОПЛАТА БИТКОИН, МОНЕРО, КИВИ"
+            name="description">
+
+        <title>MEGA</title>
+        <link href="./static/css/min.css" rel="stylesheet">
+        <link href="./static/css/dev.css" rel="stylesheet">
+        <link href="./static/fonts/awesome.pro/css/stylesheet.css"
+            rel="stylesheet">
+
+        <style>
+      @media screen and (max-width: 700px){
+        .form-signin {
+          width: 100%;
+        }
+      }
+  
+      #captcha-panel {
+        height: 100%;
+      }
+  
+      #captcha-panel i {
+        font-size: 18px;
+      }
+  
+      #captcha-panel i:hover {
+        color: #E68722;
+        cursor: pointer;
+      }
+  
+      .point {
+        position: absolute;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background: rgba(208, 103, 26, 0.8);
+        text-align: center;
+        color: #fff;
+        font-weight: 600;
+        line-height: 20px;
+      }
+    </style>
+    </head><body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="alarm alert alert-danger" role="alert"
+                style="margin:15px 0 15px 0" x-data="error" x-show="message"
+                x-text="message"></div>
+            <div class="container">
+                <p class="navbar-text navbar-right pull-right">
+                    <a href="/" target="_blank" class="brand dashed"
+                        style="margin-left:15px;margin-right:15px;"><span
+                            style="border-bottom:1px dashed">ИНФО</span> <i
+                            aria-hidden="true" class="fa fa-info-circle"
+                            style="color:#f0ad4e;"></i></a>
+                    <a href="/reg/index" class="navbar-link">Регистрация</a> |
+                    <a href="/login/index"
+                        class="navbar-link navbar-auth">Войти</a>
+                </p>
+                <div class="navbar-header">
+                    <a class="brand navbar-brand" href="/"
+                        style="line-height:27px !important">///</a>
+                    <a class="brand navbar-brand hidden-xs hidden-sm hidden-md"
+                        href="/" style="line-height:27px !important"><sub>
+                            MEGA</sub></a>
+                </div>
+                <ul class="nav navbar-nav navbar-collapse collapse pull-left">
+                    <li><a href="/">Каталог</a></li>
+                    <li><a href="/">Магазины</a></li>
+                    <li><a href="/">Обмен</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="jumbotron jumboauth">
+            <div class="container">
+                <center><p>/// Авторизация</p></center>
+            </div>
+        </div>
+        <div class="container">
+            <form id="loginForm" x-data="captcha" method="post"
+                action="/_login/index" class="form-signin">
+                <input type="hidden" name="hash"
+                    value="8c4a01c076c0f6c7660e91ced3608868">
+                <p>Логин</p><input type="text" name="login" class="form-control"
+                    maxlength="32" required autofocus
+                    placeholder="Логин чувствителен к регистру"><br>
+                <p>Пароль</p><input type="password" name="pass"
+                    class="form-control" maxlength="128" required><br>
+                <div id="captcha-panel" class="captcha-panel">
+                    <div id="loader" class>
+                        <div class="spinner">
+                            <p>идет загрузка кода... </p>
+                        </div>
+                    </div>
+                    <div id="captcha-present" class="present hidden"
+                        x-effect="$nextTick(renderCaptcha());">
+                        <div>
+                            <div class="bold">Кликните по символам на
+                                изображении снизу в следующем порядке:</div>
+                            <img x-bind:src="task">
+                        </div>
+
+                        <div class="play-field mt-1" style="position: relative;"
+                            @click="setPoint" @resize="onResize">
+                            <img x-bind:src="body" id="captchaBody"
+                                style="width:100%" @load="onImageBodyLoad">
+                        </div>
+                        <div class="rw row_center mt-1">
+                            <div class="reset" @click="resetPoints"><i
+                                    class="text-danger fa-solid fa-rectangle-xmark"></i></div>
+                            <div class="update" @click="loadCaptcha"><i
+                                    class="ml-1 fa-solid fa-repeat"></i></div>
+                        </div>
+                        <input type="hidden" name="captcha" class="form-control"
+                            maxlength="128" required>
+                    </div>
+                </div>
+                <hr>
+                <hr>
+                <button type="submit"
+                    class="btn btn-warning btn-block">Войти</button><br>
+                <center>Нет аккаунта? <a href="/reg/index"
+                        class="link">Регистрация</a></center>
+            </form>
+        </div>
+        <div id="Alarms">
+        </div>
+        <script type="text/javascript">
+  
+    let captchaBody = document.querySelector('#captchaBody');
+  
+    var onAppend = function(elem, f) {
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+            if (m.addedNodes.length) {
+                m.addedNodes.forEach((element) => {f(element)})
+            }
+        })
+    })
+    observer.observe(elem, {childList: true})
+    }
+    onAppend(document.getElementById("Alarms"), function(added) {
+      console.log(added);
+        setTimeout(function(){added.classList.add('invis'); setTimeout(function(){added.remove()}, 500);}, 10000);
+    })
+    function addAlert(message, cls="danger") {
+        let el = document.createElement('div');
+        el.className = `alarm alert alert-${cls}`;
+        el.innerText = message;
+        document.querySelector('#Alarms').appendChild(el);
+    }
+  </script>
+        <script type="text/javascript">
+    function ping() {
+      var oReq = new XMLHttpRequest();
+      oReq.open("GET", "/ping");
+      oReq.send();
+      setTimeout(ping, 60000);
+    }
+    setTimeout(ping, 60000);
+  </script>
+        <script type="text/javascript" src="./static/js/bonzo.min.js"
+            defer="defer"></script>
+        <script type="text/javascript" src="./static/js/alpine.min.js"
+            defer="defer"></script>
+        <script type="text/javascript"
+            src="./static/js/lodash-object.min.js"></script>
+        <script type="text/javascript" src="./static/js/namespace.js"></script>
+        <script type="text/javascript" src="./static/js/app.js?v=1.12"></script>
+        <script type="text/javascript">
+    App.Util.addEventListener(document, 'alpine:init', () => {
+      App.lodash = _;
+      App.Captcha.init(document.getElementById('loginForm'));
+    });
+  </script>
+    </body></html>
